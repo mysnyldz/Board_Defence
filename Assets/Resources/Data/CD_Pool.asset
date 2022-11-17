@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76080a80448d49c9a8c1a7ad9394e29f, type: 3}
+  m_Name: CD_Pool
+  m_EditorClassIdentifier: 
+  PoolValueDatas:
+    m_Keys: 000000000100000002000000030000000400000005000000060000000800000007000000
+    m_Values:
+    - ObjectLimit: 10
+      PooledObject: {fileID: 7067174340260325074, guid: 8b1f7245c2b422a41a49c6d38b407d80, type: 3}
+    - ObjectLimit: 10
+      PooledObject: {fileID: 639692194749709148, guid: ce36ba97f880eaa4a9759494c5abadac, type: 3}
+    - ObjectLimit: 10
+      PooledObject: {fileID: 8660717728799078913, guid: 4141e9d0e8ba1684cbbacf6f44108876, type: 3}
+    - ObjectLimit: 10
+      PooledObject: {fileID: 5950202945165240508, guid: f223c3575be4ff74eb0cf1b0a0ea7720, type: 3}
+    - ObjectLimit: 10
+      PooledObject: {fileID: 2139291014405506879, guid: c67d2369e795d9e4795c3900602f3106, type: 3}
+    - ObjectLimit: 10
+      PooledObject: {fileID: 5849824872682476382, guid: 4786c9a6abdf02741982e6516cc55c16, type: 3}
+    - ObjectLimit: 30
+      PooledObject: {fileID: 7268112919316687869, guid: 75c1cfe6d2ab1f948975197ad4a9ef42, type: 3}
+    - ObjectLimit: 10
+      PooledObject: {fileID: 2390917705692318356, guid: 3ac5bbc4d6e370940bcb0607725b98fc, type: 3}
+    - ObjectLimit: 10
+      PooledObject: {fileID: 7268112919316687869, guid: 15b595b7ff5cf1a4786e906dac8d851d, type: 3}

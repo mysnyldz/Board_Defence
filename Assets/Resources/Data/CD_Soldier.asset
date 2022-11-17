@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc48b2bcfe547d8be6329ff2b7a654d, type: 3}
+  m_Name: CD_Soldier
+  m_EditorClassIdentifier: 
+  SoldierData:
+    SoldierTypeDatas:
+      m_Keys: 000000000100000002000000
+      m_Values:
+      - Damage: 3
+        FireRate: 3
+        Forward: 1
+        All: 0
+        Range: 4
+      - Damage: 5
+        FireRate: 4
+        Forward: 1
+        All: 0
+        Range: 2
+      - Damage: 10
+        FireRate: 5
+        Forward: 0
+        All: 1
+        Range: 1
