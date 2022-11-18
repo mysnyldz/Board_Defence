@@ -87,6 +87,5 @@ namespace Managers
             _currentSoldierCount[_selectedSoldier]++;
         }
         
-
     }
 }

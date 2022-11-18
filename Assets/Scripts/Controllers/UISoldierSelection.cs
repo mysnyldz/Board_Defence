@@ -29,7 +29,7 @@ namespace Controllers
 
         private GameObject _selectionSoldier;
         private SoldierManager _soldierManager;
-        private SoldierType _soldierType = SoldierType.Pistol;
+        private SoldierType _soldierType = SoldierType.PistolSoldier;
 
         #endregion
 

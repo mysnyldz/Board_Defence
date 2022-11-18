@@ -13,8 +13,10 @@ namespace Signals
         public UnityAction onFailed = delegate { };
         
         public UnityAction onTryAgain = delegate {  };
+        
+        public UnityAction onNextLevel = delegate {  };
 
-        public UnityAction onNextLevel = delegate { };
+        public UnityAction onSuccessful = delegate { };
         
         public UnityAction onPlay = delegate { };
         

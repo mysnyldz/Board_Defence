@@ -56,6 +56,7 @@ namespace States.EnemyStates
                 SoldierSignals.Instance.onEnemyRemoveTargetList?.Invoke(_agent.gameObject);
                 _agent.enabled = true;
                 PoolSignals.Instance.onReleasePoolObject?.Invoke(_types.ToString(), _agent.gameObject);
+                EnemySignals.Instance.onDecreaseTotalEnemyCount.Invoke(1);
             }
         }
 

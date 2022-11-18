@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Data.UnityObject;
 using Data.UnityObjects;
 using Data.ValueObject;
@@ -22,6 +23,7 @@ namespace Managers
         [SerializeField] private List<GameObject> spawnPoints;
         [SerializeField] private List<GameObject> basePoints;
         [SerializeField] private int timer;
+        [ShowInInspector] private int totalEnemyCount;
 
         #endregion
 
@@ -40,7 +42,7 @@ namespace Managers
 
         private int _randomSpawnDatas;
 
-        private bool isPlayed = false;
+        [ShowInInspector] private bool isPlayed = false;
 
         #endregion
 
@@ -49,21 +51,33 @@ namespace Managers
         private void OnEnable()
         {
             SubscribeEvents();
+            _currentlevel = LevelSignals.Instance.onGetLevelCount();
+            _spawnDatas = Resources.Load<CD_Level>("Data/CD_Level").LevelData[_currentlevel].enemySpawnListData;
+            _currentEnemyCount = new List<int>(new int[_spawnDatas.SpawnDatas.Count]);
+            TotalEnemyCount();
         }
 
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay += OnPlay;
+            CoreGameSignals.Instance.onSuccessful += OnSuccessful;
+            CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             EnemySignals.Instance.onGetBasePoints += OnGetBasePoints;
             EnemySignals.Instance.onGetSpawnPoints += OnGetSpawnPoints;
+            EnemySignals.Instance.onGetTotalEnemyCount += OnGetTotalEnemyCount;
+            EnemySignals.Instance.onDecreaseTotalEnemyCount += OnDecreaseTotalEnemyCount;
         }
 
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onSuccessful -= OnSuccessful;
+            CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
             EnemySignals.Instance.onGetBasePoints -= OnGetBasePoints;
             EnemySignals.Instance.onGetSpawnPoints -= OnGetSpawnPoints;
+            EnemySignals.Instance.onGetTotalEnemyCount -= OnGetTotalEnemyCount;
+            EnemySignals.Instance.onDecreaseTotalEnemyCount -= OnDecreaseTotalEnemyCount;
         }
 
         private void OnDisable()
@@ -78,13 +92,20 @@ namespace Managers
             _enemyTimer += Time.deltaTime;
             if (_enemyTimer >= timer && isPlayed)
             {
-                var i = CurrentEnemyCheck();
-                if (i)
+                if (totalEnemyCount >= 1)
                 {
-                    EnemySpawn();
-                }
+                    var i = CurrentEnemyCheck();
+                    if (i)
+                    {
+                        EnemySpawn();
+                    }
 
-                _enemyTimer = 0;
+                    _enemyTimer = 0;
+                }
+                else
+                {
+                    CoreGameSignals.Instance.onSuccessful.Invoke();
+                }
             }
         }
 
@@ -100,6 +121,24 @@ namespace Managers
             }
 
             return false;
+        }
+
+        private void TotalEnemyCount()
+        {
+            for (int i = 0; i < _currentEnemyCount.Count; i++)
+            {
+                totalEnemyCount += _spawnDatas.SpawnDatas[i].EnemyCount;
+            }
+        }
+
+        private int OnGetTotalEnemyCount()
+        {
+            return totalEnemyCount;
+        }
+
+        private void OnDecreaseTotalEnemyCount(int value)
+        {
+            totalEnemyCount -= value;
         }
 
         private void EnemySpawn()
@@ -128,10 +167,22 @@ namespace Managers
 
         private void OnPlay()
         {
+            IsPlayedTrue();
+        }
+
+        private void OnNextLevel()
+        {
+            IsPlayedTrue();
+        }
+
+        private async void IsPlayedTrue()
+        {
+            await Task.Delay(2000);
             isPlayed = true;
-            _currentlevel = LevelSignals.Instance.onGetLevelCount();
-            _spawnDatas = Resources.Load<CD_Level>("Data/CD_Level").LevelData[_currentlevel].enemySpawnListData;
-            _currentEnemyCount = new List<int>(new int[_spawnDatas.SpawnDatas.Count]);
+        }
+        private void OnSuccessful()
+        {
+            isPlayed = false;
         }
     }
 }

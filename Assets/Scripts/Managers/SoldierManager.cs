@@ -55,13 +55,14 @@ namespace Managers
         {
             SoldierSignals.Instance.onGetSoldierType += OnGetSoldierType;
             SoldierSignals.Instance.onEnemyRemoveTargetList += OnEnemyRemoveTargetList;
+            CoreGameSignals.Instance.onReset += OnReset;
         }
-
 
         private void UnsubscribeEvents()
         {
             SoldierSignals.Instance.onGetSoldierType -= OnGetSoldierType;
             SoldierSignals.Instance.onEnemyRemoveTargetList -= OnEnemyRemoveTargetList;
+            CoreGameSignals.Instance.onReset -= OnReset;
         }
 
         private void OnDisable()
@@ -77,14 +78,14 @@ namespace Managers
         {
             switch (SoldierType)
             {
-                case SoldierType.Pistol:
+                case SoldierType.PistolSoldier:
                     soldierShootController.isAttack(PoolType.PistolBullet);
                     break;
-                case SoldierType.ShotGun:
+                case SoldierType.ShotgunSoldier:
                     soldierShootController.isAttack(PoolType.ShotgunBullet);
                     break;
-                case SoldierType.Knife:
-                    soldierShootController.isAttack(PoolType.Nuke);
+                case SoldierType.NukeSoldier:
+                    soldierShootController.isAttack(PoolType.NukeBomb);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -109,5 +110,10 @@ namespace Managers
         {
             return _type;
         }
-    }
+
+        private void OnReset()
+        {
+            PoolSignals.Instance.onReleasePoolObject?.Invoke(SoldierType.ToString(),gameObject);
+        }
+}
 }

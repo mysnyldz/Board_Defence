@@ -38,7 +38,10 @@ namespace Managers
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             UISignals.Instance.onGetSoldierType += OnGetSoldierType;
+            UISignals.Instance.onQuitGame += OnQuitGame;
             CoreGameSignals.Instance.onPlay += OnPlay;
+            CoreGameSignals.Instance.onNextLevel += OnNextLevel;
+            CoreGameSignals.Instance.onSuccessful += OnSuccessful;
             CoreGameSignals.Instance.onTryAgain += OnTryAgain;
             CoreGameSignals.Instance.onFailed += OnFailed;
         }
@@ -49,7 +52,10 @@ namespace Managers
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             UISignals.Instance.onGetSoldierType -= OnGetSoldierType;
+            UISignals.Instance.onQuitGame -= OnQuitGame;
             CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
+            CoreGameSignals.Instance.onSuccessful -= OnSuccessful;
             CoreGameSignals.Instance.onTryAgain -= OnTryAgain;
             CoreGameSignals.Instance.onFailed -= OnFailed;
         }
@@ -77,6 +83,23 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.PlayPanel);
         }
 
+        public void OnSuccessful()
+        {
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.PlayPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.CompletedPanel);
+        }
+
+        public void OnNextLevel()
+        {
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.CompletedPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.PlayPanel);
+        }
+
+        public void NextLevel()
+        {
+            CoreGameSignals.Instance.onNextLevel?.Invoke();
+        }
+
         public void Play()
         {
             CoreGameSignals.Instance.onPlay?.Invoke();
@@ -97,6 +120,11 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.TryPanel);
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.PlayPanel);
+        }
+
+        public void OnQuitGame()
+        {
+            Application.Quit();
         }
     }
 }

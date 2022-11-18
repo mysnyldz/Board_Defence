@@ -9,6 +9,5 @@ namespace Data.ValueObject
     {
         public EnemyTypes EnemyTypes;
         public int EnemyCount;
-        //public int CurrentEnemyCount = 0;
     }
 }

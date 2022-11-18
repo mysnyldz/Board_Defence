@@ -2,6 +2,7 @@
 using Data.ValueObject;
 using Enums;
 using Signals;
+using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -61,6 +62,16 @@ namespace UnityTemplateProjects.Controller
 
                     _gridArray[x, z].transform.parent = holder.transform;
                     _gridArray[x, z].gameObject.name = "( x: " + x.ToString() + "z: " + z.ToString() + " )";
+                }
+            }
+        }
+        public void GridReset()
+        {
+            for (int x = 0; x < _gridArray.GetLength(0); x++)
+            {
+                for (int z = 0; z < _gridArray.GetLength(1); z++)
+                {
+                    Destroy(_gridArray[x, z]);
                 }
             }
         }

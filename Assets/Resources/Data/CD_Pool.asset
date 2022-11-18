@@ -31,5 +31,5 @@ MonoBehaviour:
       PooledObject: {fileID: 7268112919316687869, guid: 75c1cfe6d2ab1f948975197ad4a9ef42, type: 3}
     - ObjectLimit: 10
       PooledObject: {fileID: 2390917705692318356, guid: 3ac5bbc4d6e370940bcb0607725b98fc, type: 3}
-    - ObjectLimit: 10
+    - ObjectLimit: 30
       PooledObject: {fileID: 7268112919316687869, guid: 15b595b7ff5cf1a4786e906dac8d851d, type: 3}

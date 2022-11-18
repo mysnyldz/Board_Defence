@@ -39,8 +39,8 @@ MonoBehaviour:
         EnemyCount: 2
     soldierSpawnListData:
       SpawnDatas:
-        m_Keys: 
-        m_Values: 
+        m_Keys: 000000000100000002000000
+        m_Values: 030000000400000002000000
   - LevelIdData:
       LevelId: 2
     enemySpawnListData:
@@ -53,5 +53,5 @@ MonoBehaviour:
         EnemyCount: 3
     soldierSpawnListData:
       SpawnDatas:
-        m_Keys: 
-        m_Values: 
+        m_Keys: 000000000100000002000000
+        m_Values: 050000000700000005000000

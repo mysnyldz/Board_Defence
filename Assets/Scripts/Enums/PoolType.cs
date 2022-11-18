@@ -2,14 +2,14 @@
 {
     public enum PoolType
     {
-        Pistol,
-        ShotGun,
-        Knife,
+        PistolSoldier,
+        ShotgunSoldier,
+        NukeSoldier,
         EnemySpeed,
         EnemyNormal,
         EnemyTank,
         PistolBullet,
         ShotgunBullet,
-        Nuke
+        NukeBomb
     }
 }

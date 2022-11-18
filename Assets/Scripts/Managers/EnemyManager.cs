@@ -65,11 +65,14 @@ namespace Managers
         private void SubscribeEvents()
         {
             EnemySignals.Instance.onTakeDamage += OnTakeDamage;
+            CoreGameSignals.Instance.onReset += OnReset;
         }
+
 
         private void UnsubscribeEvents()
         {
             EnemySignals.Instance.onTakeDamage -= OnTakeDamage;
+            CoreGameSignals.Instance.onReset -= OnReset;
         }
 
         private void OnDisable()
@@ -138,6 +141,10 @@ namespace Managers
             }
 
             _currentEnemyBaseState.EnterState();
+        }
+        private void OnReset()
+        {
+            PoolSignals.Instance.onReleasePoolObject.Invoke(types.ToString(),gameObject);
         }
     }
 }

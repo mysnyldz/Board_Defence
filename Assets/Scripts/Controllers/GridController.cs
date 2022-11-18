@@ -14,11 +14,11 @@ namespace Controllers
     {
         public GridStateTypes gridStateTypes;
 
-        private SoldierType _soldierType = SoldierType.Pistol;
+        private SoldierType _soldierType = SoldierType.PistolSoldier;
 
         private GameObject _soldier;
         [SerializeField] private GameObject snapPoint;
-
+        
         public void GridControll()
         {
             if (gridStateTypes != GridStateTypes.Placeable) return;
@@ -30,5 +30,6 @@ namespace Controllers
             _soldier.transform.localPosition = new Vector3(0, 0, 0);
             SoldierSignals.Instance.onAddCurrentSoldierCount?.Invoke();
         }
+        
     }
 }

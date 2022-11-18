@@ -4,7 +4,9 @@ using Data.UnityObject;
 using Data.UnityObjects;
 using Data.ValueObject;
 using Signals;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 namespace Managers
 {
@@ -31,6 +33,7 @@ namespace Managers
 
         private int _levelID;
         private int _uniqueID;
+        private LevelIdData levelIdData;
 
         #endregion
 
@@ -79,7 +82,7 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            CoreGameSignals.Instance.onNextLevel += OnNextLevel;
+            CoreGameSignals.Instance.onSuccessful += OnSuccessful;
             CoreGameSignals.Instance.onLevelInitialize += OnInitializeLevel;
             CoreGameSignals.Instance.onClearActiveLevel += OnClearActiveLevel;
             CoreGameSignals.Instance.onReset += OnReset;
@@ -90,7 +93,7 @@ namespace Managers
 
         private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
+            CoreGameSignals.Instance.onSuccessful -= OnSuccessful;
             CoreGameSignals.Instance.onLevelInitialize -= OnInitializeLevel;
             CoreGameSignals.Instance.onClearActiveLevel -= OnClearActiveLevel;
             CoreGameSignals.Instance.onReset -= OnReset;
@@ -99,7 +102,7 @@ namespace Managers
             LevelSignals.Instance.onGetLevelCount -= OnGetLevelCount;
         }
 
-        private void OnDisable()
+        private void OnDisable() 
         {
             UnsubscribeEvents();
         }
@@ -113,14 +116,13 @@ namespace Managers
 
         #region Level Management
 
-        private void OnNextLevel()
+        private void OnSuccessful()
         {
             _levelID++;
             Save();
             CoreGameSignals.Instance.onReset?.Invoke();
             UISignals.Instance.onSetLevelText?.Invoke(_levelID);
         }
-
         private void OnReset()
         {
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
@@ -156,7 +158,8 @@ namespace Managers
 
         public void Load()
         {
-            LevelIdData levelIdData = SaveLoadSignals.Instance.onLoadLevelData.Invoke(LevelIdData.LevelKey, _uniqueID);
+            var levelKey = LevelIdData.LevelKey;
+            SaveLoadSignals.Instance.onLoadLevelData.Invoke(levelKey, _uniqueID);
         }
 
         #endregion

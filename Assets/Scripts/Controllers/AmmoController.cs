@@ -54,29 +54,29 @@ namespace Controllers
             {
                 switch (soldierType)
                 {
-                    case SoldierType.Pistol:
+                    case SoldierType.PistolSoldier:
                         PoolSignals.Instance.onReleasePoolObject?.Invoke(PoolType.PistolBullet.ToString(), gameObject);
                         EnemySignals.Instance.onTakeDamage?.Invoke(_data.Damage, other.gameObject);
                         break;
-                    case SoldierType.ShotGun:
+                    case SoldierType.ShotgunSoldier:
                         PoolSignals.Instance.onReleasePoolObject?.Invoke(PoolType.ShotgunBullet.ToString(), gameObject);
                         EnemySignals.Instance.onTakeDamage?.Invoke(_data.Damage, other.gameObject);
                         break;
-                    case SoldierType.Knife:
+                    case SoldierType.NukeSoldier:
                         nukeList.Add(other.gameObject);
                         break;
                 }
             }
             else if (other.CompareTag("PlaceableGround"))
             {
-                if (soldierType == SoldierType.Knife)
+                if (soldierType == SoldierType.NukeSoldier)
                 {
                     for (int i = 0; i < nukeList.Count; i++)
                     {
                         EnemySignals.Instance.onTakeDamage?.Invoke(_data.Damage, nukeList[i]);
                     }
                     nukeList.Clear();
-                    PoolSignals.Instance.onReleasePoolObject?.Invoke(PoolType.Nuke.ToString(), gameObject);
+                    PoolSignals.Instance.onReleasePoolObject?.Invoke(PoolType.NukeBomb.ToString(), gameObject);
                 }
             }
         }

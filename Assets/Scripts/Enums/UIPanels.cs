@@ -5,5 +5,6 @@
         PlayPanel,
         MenuPanel,
         TryPanel,
+        CompletedPanel,
     }
 }

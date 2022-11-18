@@ -2,8 +2,8 @@
 {
     public enum SoldierType
     {
-        Pistol,
-        ShotGun,
-        Knife
+        PistolSoldier,
+        ShotgunSoldier,
+        NukeSoldier
     }
 }

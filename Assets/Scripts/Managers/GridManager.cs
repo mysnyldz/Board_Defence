@@ -46,12 +46,18 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay += OnPlay;
+            CoreGameSignals.Instance.onReset += OnReset;
+            CoreGameSignals.Instance.onNextLevel += OnNextLevel;
+            
         }
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onReset -= OnReset;
+            CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
         }
+
 
         private void OnDisable()
         {
@@ -70,6 +76,15 @@ namespace Managers
         private void OnPlay()
         {
             gridCreatorController.GridCreator(_width, _height, _cellSpaceSize);
+        }
+
+        private void OnNextLevel()
+        {
+            OnPlay();
+        }
+        private void OnReset()
+        {
+            gridCreatorController.GridReset();
         }
 
         private GridData GetData() => Resources.Load<CD_Grid>("Data/CD_Grid").data;

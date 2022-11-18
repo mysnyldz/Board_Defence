@@ -7,6 +7,7 @@ namespace Managers
 {
     public class InputManager : MonoBehaviour
     {
+
         [SerializeField] private LayerMask layer;
 
         private RaycastHit _hit;
@@ -24,7 +25,8 @@ namespace Managers
                 {
                     if (_hit.collider.CompareTag("PlaceableGround"))
                     {
-                        _hit.transform.GetComponent<GridController>().GridControll();
+                        var _gridController = _hit.transform.GetComponent<GridController>();
+                        _gridController.GridControll();
                     }
                 }
             }
