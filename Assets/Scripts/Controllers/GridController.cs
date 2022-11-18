@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Data.UnityObjects;
 using Data.ValueObject;
 using Enums;
@@ -15,10 +16,11 @@ namespace Controllers
         public GridStateTypes gridStateTypes;
 
         private SoldierType _soldierType = SoldierType.PistolSoldier;
+        [SerializeField] private GameObject _nukeParticle;
 
         private GameObject _soldier;
         [SerializeField] private GameObject snapPoint;
-        
+
         public void GridControll()
         {
             if (gridStateTypes != GridStateTypes.Placeable) return;
@@ -30,6 +32,15 @@ namespace Controllers
             _soldier.transform.localPosition = new Vector3(0, 0, 0);
             SoldierSignals.Instance.onAddCurrentSoldierCount?.Invoke();
         }
-        
+
+        private async void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Nuke"))
+            {
+                _nukeParticle.SetActive(true);
+                await Task.Delay(1200);
+                _nukeParticle.SetActive(false);
+            }
+        }
     }
 }

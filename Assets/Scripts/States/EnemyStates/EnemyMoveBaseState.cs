@@ -2,6 +2,7 @@
 using Data.ValueObject;
 using Enums;
 using Managers;
+using Signals;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -52,7 +53,7 @@ namespace States.EnemyStates
         {
             if (other.CompareTag("BasePoint"))
             {
-                
+                CoreGameSignals.Instance.onFailed?.Invoke();
             }
             
         }

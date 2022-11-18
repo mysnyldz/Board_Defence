@@ -46,6 +46,7 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay += OnPlay;
+            CoreGameSignals.Instance.onTryAgain += OnTryAgain;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             
@@ -54,6 +55,7 @@ namespace Managers
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onTryAgain -= OnTryAgain;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
         }
@@ -76,6 +78,11 @@ namespace Managers
         private void OnPlay()
         {
             gridCreatorController.GridCreator(_width, _height, _cellSpaceSize);
+        }
+
+        private void OnTryAgain()
+        {
+            OnPlay();
         }
 
         private void OnNextLevel()

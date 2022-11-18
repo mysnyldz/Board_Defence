@@ -550,7 +550,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f67765e775fcf0f459fae7db2e7c8f6f, type: 2}
+  - {fileID: 2100000, guid: 3687d97165910204fbe0f1a15fa43adb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1033,9 +1033,9 @@ GameObject:
   m_Component:
   - component: {fileID: 687411342291744652}
   - component: {fileID: 9038085174124159328}
-  - component: {fileID: 128815029881293664}
+  - component: {fileID: 652679377}
   m_Layer: 0
-  m_Name: KnifeSoldier
+  m_Name: NukeSoldier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1070,12 +1070,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SoldierType: 2
+  SoldierAnim: 0
   AnimValue: 0
-  soldierMovementController: {fileID: 128815029881293664}
+  soldierMovementController: {fileID: 652679377}
   soldierShootController: {fileID: 342996445}
   soldierAnimationController: {fileID: 2500097789255213994}
   _type: 2
---- !u!114 &128815029881293664
+--- !u!114 &652679377
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -62,6 +62,8 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onSuccessful += OnSuccessful;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
+            CoreGameSignals.Instance.onFailed += OnFailed;
+            CoreGameSignals.Instance.onTryAgain += OnTryAgain;
             EnemySignals.Instance.onGetBasePoints += OnGetBasePoints;
             EnemySignals.Instance.onGetSpawnPoints += OnGetSpawnPoints;
             EnemySignals.Instance.onGetTotalEnemyCount += OnGetTotalEnemyCount;
@@ -74,6 +76,8 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onSuccessful -= OnSuccessful;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
+            CoreGameSignals.Instance.onFailed -= OnFailed;
+            CoreGameSignals.Instance.onTryAgain -= OnTryAgain;
             EnemySignals.Instance.onGetBasePoints -= OnGetBasePoints;
             EnemySignals.Instance.onGetSpawnPoints -= OnGetSpawnPoints;
             EnemySignals.Instance.onGetTotalEnemyCount -= OnGetTotalEnemyCount;
@@ -175,12 +179,22 @@ namespace Managers
             IsPlayedTrue();
         }
 
+        private void OnTryAgain()
+        {
+            IsPlayedTrue();
+        }
+
         private async void IsPlayedTrue()
         {
             await Task.Delay(2000);
             isPlayed = true;
         }
         private void OnSuccessful()
+        {
+            isPlayed = false;
+        }
+
+        private void OnFailed()
         {
             isPlayed = false;
         }

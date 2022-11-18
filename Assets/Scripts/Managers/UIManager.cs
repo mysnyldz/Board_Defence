@@ -15,6 +15,7 @@ namespace Managers
 
         [SerializeField] private UIPanelController UIPanelController;
         [SerializeField] private UISoldierSelection UISoldierSelection;
+        [SerializeField] private TextMeshProUGUI levelText;
 
         #endregion SerializeField Variables
 
@@ -39,6 +40,7 @@ namespace Managers
             UISignals.Instance.onClosePanel += OnClosePanel;
             UISignals.Instance.onGetSoldierType += OnGetSoldierType;
             UISignals.Instance.onQuitGame += OnQuitGame;
+            UISignals.Instance.onSetLevelText += OnSetLevelText;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             CoreGameSignals.Instance.onSuccessful += OnSuccessful;
@@ -53,6 +55,7 @@ namespace Managers
             UISignals.Instance.onClosePanel -= OnClosePanel;
             UISignals.Instance.onGetSoldierType -= OnGetSoldierType;
             UISignals.Instance.onQuitGame -= OnQuitGame;
+            UISignals.Instance.onSetLevelText -= OnSetLevelText;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
             CoreGameSignals.Instance.onSuccessful -= OnSuccessful;
@@ -116,6 +119,11 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.PlayPanel);
         }
 
+        public void TryAgain()
+        {
+            CoreGameSignals.Instance.onTryAgain?.Invoke();
+        }
+
         public void OnFailed()
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.TryPanel);
@@ -125,6 +133,11 @@ namespace Managers
         public void OnQuitGame()
         {
             Application.Quit();
+        }
+
+        private void OnSetLevelText(int Value)
+        {
+            levelText.text = "Level " + (Value + 1);
         }
     }
 }

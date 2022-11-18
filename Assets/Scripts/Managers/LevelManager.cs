@@ -49,6 +49,7 @@ namespace Managers
         {
             GetData();
             OnInitializeLevel();
+            SetLevelText();
         }
 
 
@@ -83,6 +84,7 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onSuccessful += OnSuccessful;
+            CoreGameSignals.Instance.onFailed += OnFailed;
             CoreGameSignals.Instance.onLevelInitialize += OnInitializeLevel;
             CoreGameSignals.Instance.onClearActiveLevel += OnClearActiveLevel;
             CoreGameSignals.Instance.onReset += OnReset;
@@ -94,6 +96,7 @@ namespace Managers
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onSuccessful -= OnSuccessful;
+            CoreGameSignals.Instance.onFailed -= OnFailed;
             CoreGameSignals.Instance.onLevelInitialize -= OnInitializeLevel;
             CoreGameSignals.Instance.onClearActiveLevel -= OnClearActiveLevel;
             CoreGameSignals.Instance.onReset -= OnReset;
@@ -113,6 +116,13 @@ namespace Managers
         {
             Save();
         }
+        
+        private void SetLevelText()
+        {
+            
+            UISignals.Instance.onSetLevelText?.Invoke(_levelID);
+
+        }
 
         #region Level Management
 
@@ -121,12 +131,18 @@ namespace Managers
             _levelID++;
             Save();
             CoreGameSignals.Instance.onReset?.Invoke();
-            UISignals.Instance.onSetLevelText?.Invoke(_levelID);
+            SetLevelText();
         }
         private void OnReset()
         {
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
+            UISignals.Instance.onSetLevelText?.Invoke(_levelID);
+        }
+
+        private void OnFailed()
+        {
+            CoreGameSignals.Instance.onReset?.Invoke();
         }
 
         private void OnInitializeLevel()
